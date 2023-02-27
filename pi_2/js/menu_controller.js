@@ -3,11 +3,8 @@ function start_game(){
 	loadpage("./html/game.html");
 }
 
-function exit (){
-	if (name != ""){
-		alert("Leaving " + name + "'s game");
-	}
-	name = "";
+function exit(){
+	loadpage("../index.html");
 }
 
 function options(){

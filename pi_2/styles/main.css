@@ -1,6 +1,7 @@
 #title{
-	font-size: 26px;
-	line-height: 75px;
+	font-size: 36px;
+	line-height: 100px;
+	color: white;
 }
 
 .menu-object{
@@ -29,3 +30,15 @@ button.menu-object:hover:not(:active){
 	height: 85px;
 }
 
+hr {
+	margin-bottom: 4rem !important;
+}
+
+button {
+	background-color: darkseagreen;
+	border-color: grey;
+}
+
+body {
+	background-color: #323C3C;
+}
