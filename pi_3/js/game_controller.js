@@ -83,10 +83,10 @@ var game = new Vue({
 });
 
 
-//f(x) = 50 - 10 * x
-
-//si és hard (1): - 40, si és easy (3): - 20, 
+//si és hard (1): S'ha de restar 40, si és normal (2): s'ha de restar 30 i si és easy (3): s'ha de restar 20 per cada error.
 
 //f(x) si x = 1, f(x) = 40
 //si x = 2, f(x) = 30
 //si x = 3, f(x) = 20
+
+//f(x) = 50 - 10 * x
