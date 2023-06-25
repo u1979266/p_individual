@@ -1,5 +1,4 @@
 var options = function(){
-	// Aquí dins hi ha la part privada de l'objecte
 	var options_data = {
 		cards:2, dificulty:"hard"
 	};
@@ -43,7 +42,6 @@ var options = function(){
 		}
 	});
 	return {
-		// Aquí dins hi ha la part pública de l'objecte
 		getOptionsString: function (){
 			return JSON.stringify(options_data);
 		},
@@ -55,11 +53,6 @@ var options = function(){
 		}
 	}; 
 }();
-
-console.log(options.getOptionsString());
-console.log(options.getNumOfCards());
-console.log(options.getDificulty());
-console.log(options.options_data);
 
 
 

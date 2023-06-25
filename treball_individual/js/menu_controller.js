@@ -15,7 +15,7 @@ var menu = new Vue({
 			loadpage("html/load.html");
 		},
 		options() {
-			loadpage("options.html");
+			loadpage("html/options.html");
 		},
 		scoreboard(){
 			loadpage("html/scoreboard.html");

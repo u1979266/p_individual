@@ -55,3 +55,42 @@ button {
 body {
 	background-color: #323C3C;
 }
+
+.score-container {
+	text-align: center;
+	display: grid;
+	grid-template-columns: 1fr 20rem 20rem 1fr;
+	grid-gap: 0.625rem;
+}
+
+.score-label{
+	font-weight: bold;
+	font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.exit-button{
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 18.75rem;
+	height: 4.7rem;
+	font-size: 1rem;
+	margin-top: 5rem;
+}
+
+p{
+	text-align: center;
+}
+
+button.exit-button:active{
+	font-size: 1.125rem;
+	width: 17.19rem;
+	height: 4.375rem;
+}
+
+button.exit-button:hover:not(:active){
+	font-size: 1.475rem;
+	width: 20.3rem;
+	height: 5.313rem;
+}
