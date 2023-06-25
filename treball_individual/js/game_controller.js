@@ -83,25 +83,25 @@ var gameObj = function (){
 		watch: {
 			current_card: function(value){
 				if (value.texture === back) return;
-				var front = null;
-				var i_front = -1;
+				var davant = null;
+				var i_davant = -1;
 				for (var i = 0; i < this.current_card.length; i++){
 					if (!this.current_card[i].done && this.current_card[i].texture !== back){
-						if (front){
-							if (front.texture === this.current_card[i].texture){
-								front.done = this.current_card[i].done = true;
+						if (davant){
+							if (davant.texture === this.current_card[i].texture){
+								davant.done = this.current_card[i].done = true;
 								this.num_cards--;
 							}
 							else{
 								Vue.set(this.current_card, i, {done: false, texture: back});
-								Vue.set(this.current_card, i_front, {done: false, texture: back});
+								Vue.set(this.current_card, i_davant, {done: false, texture: back});
 								this.bad_clicks++;
 								break;
 							}
 						}
 						else{
-							front = this.current_card[i];
-							i_front = i;
+							davant = this.current_card[i];
+							i_davant = i;
 						}
 					}
 				}			

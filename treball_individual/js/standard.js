@@ -22,27 +22,27 @@ class GameScene extends Phaser.Scene {
     create (){	
 		let cartes = ['co', 'co', 'cb', 'cb', 'sb', 'sb', 'so', 'so', 'tb', 'tb', 'to', 'to'];
 		this.cameras.main.setBackgroundColor(0x323C3C);
-		let l_partida = null;
+		let l_game = null;
 		if (sessionStorage.idPartida && localStorage.partides){
-			let arrayPartides = JSON.parse(localStorage.partides);
-			if (sessionStorage.idPartida < arrayPartides.length)
-				l_partida = arrayPartides[sessionStorage.idPartida];
+			let vecPartides = JSON.parse(localStorage.partides);
+			if (sessionStorage.idPartida < vecPartides.length)
+				l_game = vecPartides[sessionStorage.idPartida];
 		}
-		if (l_partida){
-			var cartes_d = l_partida.nCartes;
-			var espaiX = cartes_d/2 * 96;
-			var espaiY = cartes_d/2 * 128;
+		if (l_game){
+			var cartes_d = l_game.nCartes;
+			var amplada = cartes_d/2 * 96;
+			var altura = cartes_d/2 * 128;
 			if (cartes_d > 5){ var f = 3; var c = 4;}
 			else{var f = 2; var c = cartes_d;}
-			this.correct=l_partida.correct;
-			var restaPunts = l_partida.restaPunts_s;
-			var temps = l_partida.temps_s;
-			var arraycards = cartes.slice(0, cartes_d * 2)
-			arraycards = l_partida.arraycards_s;
+			this.correct=l_game.correct;
+			var puntuacio_a_restar = l_game.restaPunts_s;
+			var temporitzador = l_game.temps_s;
+			var vecCards = cartes.slice(0, cartes_d * 2)
+			vecCards = l_game.arraycards_s;
 			let cart=0;
 			for (let i = 0; i < c; i++){
 				for (let j = 0; j < f; j++){
-					this.add.image(i*125 + this.cameras.main.centerX - espaiX, j*150 + this.cameras.main.centerY - espaiY/2, arraycards[cart]);
+					this.add.image(i*125 + this.cameras.main.centerX - amplada, j*150 + this.cameras.main.centerY - altura/2, vecCards[cart]);
 					cart += 1;	
 				}
 			}
@@ -53,30 +53,30 @@ class GameScene extends Phaser.Scene {
 			var options_data = JSON.parse(json);
 			var cartes_d = options_data.cards;
 			var dificultat = options_data.dificulty;
-			var espaiX = cartes_d/2 * 96;
-			var espaiY = cartes_d/2 * 128;
+			var amplada = cartes_d/2 * 96;
+			var altura = cartes_d/2 * 128;
 			if (cartes_d > 5){ var f = 3; var c = 4;}
 			else{var f = 2; var c = cartes_d;}
-			var restaPunts = null;
-			var temps = null;
+			var puntuacio_a_restar = null;
+			var temporitzador = null;
 			if (dificultat == "easy"){
-				restaPunts = 5;
-				temps = 2000;
+				puntuacio_a_restar = 5;
+				temporitzador = 2000;
 			}
 			else if (dificultat == "normal"){
-				restaPunts = 10;
-				temps = 1000;
+				puntuacio_a_restar = 10;
+				temporitzador = 1000;
 			}
 			else {
-				restaPunts = 20;
-				temps = 500;
+				puntuacio_a_restar = 20;
+				temporitzador = 500;
 			}
-			var arraycards = cartes.slice(0, cartes_d * 2)
-			arraycards.sort((a, b) => 0.5 - Math.random());
+			var vecCards = cartes.slice(0, cartes_d * 2)
+			vecCards.sort((a, b) => 0.5 - Math.random());
 			let cart=0;
 			for (let i = 0; i < c; i++){
 				for (let j = 0; j < f; j++){
-					this.add.image(i*125 + this.cameras.main.centerX - espaiX, j*150 + this.cameras.main.centerY - espaiY/2, arraycards[cart]);
+					this.add.image(i*125 + this.cameras.main.centerX - amplada, j*150 + this.cameras.main.centerY - altura/2, vecCards[cart]);
 					cart += 1;	
 				}
 			}
@@ -86,27 +86,27 @@ class GameScene extends Phaser.Scene {
 			let car=0;
 			for (let i = 0; i < c; i++){
 				for (let j = 0; j < f; j++){
-					if(l_partida){
-						if(l_partida.cards_s[car]==true){
-							this.cards.create(i*125 + this.cameras.main.centerX - espaiX, j*150 + this.cameras.main.centerY - espaiY/2, 'back');
+					if(l_game){
+						if(l_game.cards_s[car]==true){
+							this.cards.create(i*125 + this.cameras.main.centerX - amplada, j*150 + this.cameras.main.centerY - altura/2, 'back');
 						}
 					}else{
-						this.cards.create(i*125 + this.cameras.main.centerX - espaiX, j*150 + this.cameras.main.centerY - espaiY/2, 'back');
+						this.cards.create(i*125 + this.cameras.main.centerX - amplada, j*150 + this.cameras.main.centerY - altura/2, 'back');
 					}
 					car++;
 				}
 			}
 			let i = 0;
 			this.cards.children.iterate((card)=>{
-				if(l_partida){
-					while(l_partida.cards_s[i]==false){
+				if(l_game){
+					while(l_game.cards_s[i]==false){
 						i++;
 					}
-					card.card_id = arraycards[i];	
+					card.card_id = vecCards[i];	
 					i++;
 				}
 				else{
-					card.card_id = arraycards[i];	
+					card.card_id = vecCards[i];	
 					i++;
 				}				
 				card.setInteractive();
@@ -115,14 +115,14 @@ class GameScene extends Phaser.Scene {
 						card.disableBody(true,true);
 						if (this.firstClick){
 							if (this.firstClick.card_id !== card.card_id){
-								this.score -= restaPunts;
+								this.score -= puntuacio_a_restar;
 								this.mostrantError=true;
 								setTimeout(()=> {
 									this.firstClick.enableBody(false, 0, 0, true, true);
 									card.enableBody(false, 0, 0, true, true);
 									this.mostrantError=false;
 									this.firstClick = null;
-								},temps)
+								},temporitzador)
 								if (this.score <= 0){
 									alert("Game Over");
 									loadpage("../");
@@ -143,7 +143,7 @@ class GameScene extends Phaser.Scene {
 					}
 				}, card);
 			});
-		}, temps)
+		}, temporitzador)
         const button = this.add.sprite(this.cameras.main.centerX , this.cameras.main.height - 200, 'boton');
 		button.scaleX = .4;
 		button.scaleY = .4;
@@ -159,10 +159,10 @@ class GameScene extends Phaser.Scene {
 			});
 			let partida = {
 				username: user,
-				arraycards_s:arraycards,
+				arraycards_s:vecCards,
 				nCartes:cartes_d,
-				restaPunts_s:restaPunts,
-				temps_s:temps,
+				restaPunts_s:puntuacio_a_restar,
+				temps_s:temporitzador,
 				cards_s: cards_p,
 				correct:this.correct,
 				score: this.score,
