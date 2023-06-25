@@ -2,23 +2,36 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<script src="./js/loader.js"></script>
-		<script src="./js/game_info.js"></script>
-		<script src="./js/menu_controller.js"></script>
-		<link rel="stylesheet" href="../pi_2/styles/main.css">
-		<title>Modalitats de joc</title>
+		<script src="js/loader.js"></script>
+		<script src="js/game_info.js"></script>
+		<link rel="stylesheet" href="styles/main.css">
+		<title>Game Modes</title>
 	</head>
 	<body>
-		<p class="menu-object" id="title">Modalitats de joc</p>
-		<hr>
-		<button class="menu-object" onclick="loadpage('./html/index.html')"> 
-			Mode de joc 1
-		</button>
-		<button class="menu-object" onclick="loadpage('./pi_3/index.html')"> 
-			Mode de joc 2
-		</button>
-		<button class="menu-object" onclick="loadpage('../index.html')"> 
-			Sortir
-		</button>
+		<div class="menu-object" id="menu_id">
+			<p class="menu-object" id="title">Game Modes</p>
+			<hr>
+			<button class="menu-object" v-on:click="start_game('standard')">
+				Standard
+			</button>
+			<button class="menu-object" v-on:click="start_game('infinite')"> 
+				Infinite
+			</button>
+			<button class="menu-object" v-on:click="load()"> 
+				Load Game
+			</button>
+			<button class="menu-object" v-on:click="scoreboard()"> 
+				Scoreboard
+			</button>
+			<button class="menu-object" v-on:click="options()"> 
+				Options
+			</button>
+			<button class="menu-object" v-on:click="loadpage('../index.html')"> 
+				Exit
+			</button>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+		<script src="js/menu_controller.js"></script>
 	</body>
 </html>
